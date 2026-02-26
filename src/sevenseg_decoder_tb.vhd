@@ -31,12 +31,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity sevenseg_decoder is
+entity sevenseg_decoder_tb is
     Port ( i_Hex : in STD_LOGIC_VECTOR (3 downto 0);
            o_seg_n : out STD_LOGIC_VECTOR (6 downto 0));
-end sevenseg_decoder;
+end sevenseg_decoder_tb;
 
-architecture Behavioral of sevenseg_decoder is
+architecture Behavioral of sevenseg_decoder_tb is
 
 begin
     with i_Hex select
