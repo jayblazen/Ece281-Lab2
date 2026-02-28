@@ -98,7 +98,8 @@ begin
             o_seg_n => w_seg
         );
 
-    an  <= "0111" when btnC = '0' else "1111";
+    -- Active-LOW button assumption
+    an  <= "1110" when btnC = '0' else "1111";
     seg <= w_seg  when btnC = '0' else "1111111";
 
 end Behavioral;
