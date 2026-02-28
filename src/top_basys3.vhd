@@ -43,9 +43,7 @@ end top_basys3;
 
 architecture Behavioral of top_basys3 is
 
-    -- Internal signals
-    signal w_seg        : STD_LOGIC_VECTOR (6 downto 0);
-    signal w_7SD_EN_n   : STD_LOGIC;
+    signal w_seg : STD_LOGIC_VECTOR (6 downto 0);
 
 begin
 
@@ -55,12 +53,7 @@ begin
             o_seg_n => w_seg
         );
 
-    w_7SD_EN_n <= not btnC;
-    
-    --not updating
-        --this works idk about autograder
-    an <= "1110" when btnC = '1' else "1111";
-
-    seg <= w_seg when btnC = '1' else "1111111";
+    an  <= "0111" when btnC = '0' else "1111";
+    seg <= w_seg  when btnC = '0' else "1111111";
 
 end Behavioral;
