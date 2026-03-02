@@ -32,34 +32,89 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity sevenseg_decoder is
-    Port ( i_Hex : in STD_LOGIC_VECTOR (3 downto 0);
-           o_seg_n : out STD_LOGIC_VECTOR (6 downto 0));
-end sevenseg_decoder;
 
-architecture Behavioral of sevenseg_decoder is
+
+entity sevenseg_decoder_tb is
+end sevenseg_decoder_tb;
+
+architecture Behavioral of sevenseg_decoder_tb is
+
+    -- Component Declaration
+    component sevenseg_decoder
+        Port ( i_Hex  : in  STD_LOGIC_VECTOR (3 downto 0);
+               o_seg_n : out STD_LOGIC_VECTOR (6 downto 0));
+    end component;
+
+    -- Test signals
+    signal i_Hex_tb  : STD_LOGIC_VECTOR(3 downto 0);
+    signal o_seg_n_tb : STD_LOGIC_VECTOR(6 downto 0);
 
 begin
-    with i_Hex select
-        o_seg_n <=
-            "1000000" when "0000", -- 0
-            "1111001" when "0001", -- 1
-            "0100100" when "0010", -- 2
-            "0110000" when "0011", -- 3
-            "0011001" when "0100", -- 4
-            "0010010" when "0101", -- 5
-            "0000010" when "0110", -- 6
-            "1111000" when "0111", -- 7
-            "0000000" when "1000", -- 8
-            "0010000" when "1001", -- 9
-            "0001000" when "1010", -- A
-            "0000011" when "1011", -- b
-            "1000110" when "1100", -- C
-            "0100001" when "1101", -- d
-            "0000110" when "1110", -- E
-            "0001110" when "1111", -- F
-            "1111111" when others;
 
+    -- Instantiate the Unit Under Test (UUT)
+    uut: sevenseg_decoder
+        port map (
+            i_Hex  => i_Hex_tb,
+            o_seg_n => o_seg_n_tb
+        );
 
+    -- Stimulus process
+    process
+    begin
+
+        -- Test all hexadecimal values 0–F
+
+        i_Hex_tb <= "0000"; wait for 10 ns;
+        assert o_seg_n_tb = "1000000" report "Error on 0" severity error;
+
+        i_Hex_tb <= "0001"; wait for 10 ns;
+        assert o_seg_n_tb = "1111001" report "Error on 1" severity error;
+
+        i_Hex_tb <= "0010"; wait for 10 ns;
+        assert o_seg_n_tb = "0100100" report "Error on 2" severity error;
+
+        i_Hex_tb <= "0011"; wait for 10 ns;
+        assert o_seg_n_tb = "0110000" report "Error on 3" severity error;
+
+        i_Hex_tb <= "0100"; wait for 10 ns;
+        assert o_seg_n_tb = "0011001" report "Error on 4" severity error;
+
+        i_Hex_tb <= "0101"; wait for 10 ns;
+        assert o_seg_n_tb = "0010010" report "Error on 5" severity error;
+
+        i_Hex_tb <= "0110"; wait for 10 ns;
+        assert o_seg_n_tb = "0000010" report "Error on 6" severity error;
+
+        i_Hex_tb <= "0111"; wait for 10 ns;
+        assert o_seg_n_tb = "1111000" report "Error on 7" severity error;
+
+        i_Hex_tb <= "1000"; wait for 10 ns;
+        assert o_seg_n_tb = "0000000" report "Error on 8" severity error;
+
+        i_Hex_tb <= "1001"; wait for 10 ns;
+        assert o_seg_n_tb = "0010000" report "Error on 9" severity error;
+
+        i_Hex_tb <= "1010"; wait for 10 ns;
+        assert o_seg_n_tb = "0001000" report "Error on A" severity error;
+
+        i_Hex_tb <= "1011"; wait for 10 ns;
+        assert o_seg_n_tb = "0000011" report "Error on b" severity error;
+
+        i_Hex_tb <= "1100"; wait for 10 ns;
+        assert o_seg_n_tb = "1000110" report "Error on C" severity error;
+
+        i_Hex_tb <= "1101"; wait for 10 ns;
+        assert o_seg_n_tb = "0100001" report "Error on d" severity error;
+
+        i_Hex_tb <= "1110"; wait for 10 ns;
+        assert o_seg_n_tb = "0000110" report "Error on E" severity error;
+
+        i_Hex_tb <= "1111"; wait for 10 ns;
+        assert o_seg_n_tb = "0001110" report "Error on F" severity error;
+
+        report "All tests passed!" severity note;
+
+        wait;
+    end process;
 
 end Behavioral;
