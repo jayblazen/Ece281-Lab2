@@ -95,7 +95,10 @@
       <File Path="$PPRDIR/src/sevenseg_decoder.vhd">
         <FileInfo>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 021ffd0 (c)
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
