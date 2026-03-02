@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 03/02/2026 07:06:23 AM
+-- Create Date: 03/02/2026 07:04:46 AM
 -- Design Name: 
--- Module Name: sevenseg_decoder_tb - Behavioral
+-- Module Name: sevenseg_decoder - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,11 +31,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity sevenseg_decoder_tb is
---  Port ( );
-end sevenseg_decoder_tb;
+entity sevenseg_decoder is
+    Port ( i_Hex : in STD_LOGIC_VECTOR (3 downto 0);
+           o_seg_n : out STD_LOGIC_VECTOR (43 downto 0));
+end sevenseg_decoder;
 
-architecture Behavioral of sevenseg_decoder_tb is
+architecture Behavioral of sevenseg_decoder is
 
 begin
 
