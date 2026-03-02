@@ -79,7 +79,8 @@ end top_basys3;
 architecture top_basys3_arch of top_basys3 is 
 	
   -- declare the component of your top-level design
-
+    signal w_seg        : STD_LOGIC_VECTOR (6 downto 0);
+    signal w_7SD_EN_n   : STD_LOGIC;
 
   -- create wire to connect button to 7SD enable (active-low)
 
@@ -97,5 +98,17 @@ begin
 	-- display 7SD 0 only when button pushed
 	-- other 7SD are kept off
 	-----------------------------------------------------
-	
+	sevenseg_inst : entity work.sevenseg_decoder
+        port map (
+            i_Hex   => sw,
+            o_seg_n => w_seg
+        );
+
+    w_7SD_EN_n <= not btnC;
+    
+    --not updating
+        --this works idk about autograder
+    an <= "1110" when btnC = '1' else "1111";
+
+    seg <= w_seg when btnC = '1' else "1111111";
 end top_basys3_arch;
