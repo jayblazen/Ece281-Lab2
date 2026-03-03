@@ -48,69 +48,63 @@ architecture Behavioral of sevenseg_decoder_tb is
 
 begin
 
-    -- Instantiate the Unit Under Test (UUT)
     uut: sevenseg_decoder
-        port map (
-            i_Hex  => i_Hex_tb,
-            o_seg_n => o_seg_n_tb
+        port map(
+            i_Hex    => i_Hex,
+            o_seg_n => o_seg_n
         );
 
-    -- Stimulus process
-    process
+    test_process : process
     begin
+        i_Hex <= "0000"; wait for 10 ns;
+            assert o_seg_n = "1000000" report "Error on input 0" severity failure;
 
-        -- Test all hexadecimal values 0–F
+        i_Hex <= "0001"; wait for 10 ns;
+            assert o_seg_n = "1111001" report "Error on input 1" severity failure;
 
-        i_Hex_tb <= "0000"; wait for 10 ns;
-        assert o_seg_n_tb = "1000000" report "Error on 0" severity error;
+        i_Hex <= "0010"; wait for 10 ns;
+            assert o_seg_n = "0100100" report "Error on input 2" severity failure;
 
-        i_Hex_tb <= "0001"; wait for 10 ns;
-        assert o_seg_n_tb = "1111001" report "Error on 1" severity error;
+        i_Hex <= "0011"; wait for 10 ns;
+            assert o_seg_n = "0110000" report "Error on input 3" severity failure;
 
-        i_Hex_tb <= "0010"; wait for 10 ns;
-        assert o_seg_n_tb = "0100100" report "Error on 2" severity error;
+        i_Hex <= "0100"; wait for 10 ns;
+            assert o_seg_n = "0011001" report "Error on input 4" severity failure;
 
-        i_Hex_tb <= "0011"; wait for 10 ns;
-        assert o_seg_n_tb = "0110000" report "Error on 3" severity error;
+        i_Hex <= "0101"; wait for 10 ns;
+            assert o_seg_n = "0010010" report "Error on input 5" severity failure;
 
-        i_Hex_tb <= "0100"; wait for 10 ns;
-        assert o_seg_n_tb = "0011001" report "Error on 4" severity error;
+        i_Hex <= "0110"; wait for 10 ns;
+            assert o_seg_n = "0000010" report "Error on input 6" severity failure;
 
-        i_Hex_tb <= "0101"; wait for 10 ns;
-        assert o_seg_n_tb = "0010010" report "Error on 5" severity error;
+        i_Hex <= "0111"; wait for 10 ns;
+            assert o_seg_n = "1111000" report "Error on input 7" severity failure;
 
-        i_Hex_tb <= "0110"; wait for 10 ns;
-        assert o_seg_n_tb = "0000010" report "Error on 6" severity error;
+        i_Hex <= "1000"; wait for 10 ns;
+            assert o_seg_n = "0000000" report "Error on input 8" severity failure;
 
-        i_Hex_tb <= "0111"; wait for 10 ns;
-        assert o_seg_n_tb = "1111000" report "Error on 7" severity error;
+        i_Hex <= "1001"; wait for 10 ns;
+            assert o_seg_n = "0011000" report "Error on input 9" severity failure;
 
-        i_Hex_tb <= "1000"; wait for 10 ns;
-        assert o_seg_n_tb = "0000000" report "Error on 8" severity error;
+        i_Hex <= "1010"; wait for 10 ns;
+            assert o_seg_n = "0001000" report "Error on input A" severity failure;
 
-        i_Hex_tb <= "1001"; wait for 10 ns;
-        assert o_seg_n_tb = "0010000" report "Error on 9" severity error;
+        i_Hex <= "1011"; wait for 10 ns;
+            assert o_seg_n = "0000011" report "Error on input b" severity failure;
 
-        i_Hex_tb <= "1010"; wait for 10 ns;
-        assert o_seg_n_tb = "0001000" report "Error on A" severity error;
+        i_Hex <= "1100"; wait for 10 ns;
+            assert o_seg_n = "0100111" report "Error on input c" severity failure;
 
-        i_Hex_tb <= "1011"; wait for 10 ns;
-        assert o_seg_n_tb = "0000011" report "Error on b" severity error;
+        i_Hex <= "1101"; wait for 10 ns;
+            assert o_seg_n = "0100001" report "Error on input d" severity failure;
 
-        i_Hex_tb <= "1100"; wait for 10 ns;
-        assert o_seg_n_tb = "1000110" report "Error on C" severity error;
+        i_Hex <= "1110"; wait for 10 ns;
+            assert o_seg_n = "0000110" report "Error on input E" severity failure;
 
-        i_Hex_tb <= "1101"; wait for 10 ns;
-        assert o_seg_n_tb = "0100001" report "Error on d" severity error;
-
-        i_Hex_tb <= "1110"; wait for 10 ns;
-        assert o_seg_n_tb = "0000110" report "Error on E" severity error;
-
-        i_Hex_tb <= "1111"; wait for 10 ns;
-        assert o_seg_n_tb = "0001110" report "Error on F" severity error;
+        i_Hex <= "1111"; wait for 10 ns;
+            assert o_seg_n = "0001110" report "Error on input F" severity failure;
 
         report "All tests passed!" severity note;
-
         wait;
     end process;
 
