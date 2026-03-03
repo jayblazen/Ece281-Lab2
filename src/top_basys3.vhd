@@ -104,7 +104,8 @@ begin
         i_Hex   => sw,
         o_seg_n => w_seg
     );
-
+    seg <= w_seg;
+    
     an <= (0 => w_7SD_EN_n, others => '1');
 	-- display 7SD 0 only when button pushed
     w_7SD_EN_n <= not btnC;
