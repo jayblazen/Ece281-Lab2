@@ -104,11 +104,12 @@ begin
             o_seg_n => w_seg
         );
 
+    seg <= w_seg;
+    
     w_7SD_EN_n <= not btnC;
     
-    --not updating
-        --this works idk about autograder
-    an <= "1110" when btnC = '1' else "1111";
-
-    seg <= w_seg when btnC = '1' else "1111111";
+    an(0) <= w_7SD_EN_n;
+    an(1) <= '1';
+    an(2) <= '1';
+    an(3) <= '1';
 end top_basys3_arch;
