@@ -98,18 +98,19 @@ begin
 	-- display 7SD 0 only when button pushed
 	-- other 7SD are kept off
 	-----------------------------------------------------
-	sevenseg_inst : entity work.sevenseg_decoder
-        port map (
-            i_Hex   => sw,
-            o_seg_n => w_seg
-        );
 
-    seg <= w_seg;
-    
+    sevenseg_inst : entity work.sevenseg_decoder
+    port map (
+        i_Hex   => sw,
+        o_seg_n => w_seg
+    );
+
     w_7SD_EN_n <= not btnC;
     
     an(0) <= w_7SD_EN_n;
     an(1) <= '1';
     an(2) <= '1';
     an(3) <= '1';
+    
+    seg <= w_seg when btnC = '1' else "1111111";
 end top_basys3_arch;
