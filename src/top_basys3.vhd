@@ -105,12 +105,6 @@ begin
         o_seg_n => w_seg
     );
 
-    w_7SD_EN_n <= not btnC;
+    an  <= (0 => (not btnC), others => '1');
     
-    an(0) <= w_7SD_EN_n;
-    an(1) <= '1';
-    an(2) <= '1';
-    an(3) <= '1';
-    
-    seg <= w_seg when btnC = '1' else "1111111";
 end top_basys3_arch;
